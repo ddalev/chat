@@ -3,17 +3,21 @@ recipe: laravel
 config:
   webroot: ./public
 services:
-  appserver:
-    build_as_root:
-      - curl -sL https://deb.nodesource.com/setup_20.x | bash -
-      - apt-get install -y nodejs
+  node:
+    type: node:20
+    scanner: false
+    ports:
+      - 3009:3009
+    build:
+      - npm install
 tooling:
   node:
-    service: appserver
+    service: node
     cmd: node
   npm:
-    service: appserver
+    service: node
     cmd: npm
   npx:
-    service: appserver
+    service: node
     cmd: npx
+    
