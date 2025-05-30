@@ -1,2 +1,2 @@
-# chat
-Example with openAI implementation
+-# chat
+-Example with openAI implementation

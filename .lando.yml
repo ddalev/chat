@@ -1,0 +1,19 @@
+name: chat
+recipe: laravel
+config:
+  webroot: ./public
+services:
+  appserver:
+    build_as_root:
+      - curl -sL https://deb.nodesource.com/setup_20.x | bash -
+      - apt-get install -y nodejs
+tooling:
+  node:
+    service: appserver
+    cmd: node
+  npm:
+    service: appserver
+    cmd: npm
+  npx:
+    service: appserver
+    cmd: npx
