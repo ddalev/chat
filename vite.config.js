@@ -5,16 +5,16 @@ import laravel from 'laravel-vite-plugin';
 export default defineConfig({
   plugins: [
     laravel({
-      input: ['resources/css/app.css', 'resources/js/app.js'],     // основният ти входен файл
-      publicDirectory: 'public',          // Laravel публична папка
-      buildDirectory: 'build',            // -> public/build/
-      refresh: true,                      // автоматичен reload при dev
+      input: ['resources/css/app.css', 'resources/js/app.js'],
+      publicDirectory: 'public',
+      buildDirectory: 'build',
+      refresh: true,
     }),
     vue(),
   ],
   resolve: {
     alias: {
-      vue: 'vue/dist/vue.esm-bundler.js', // 👈 Ето това оправя грешката
+      vue: 'vue/dist/vue.esm-bundler.js',
     },
   },
   server: { 
