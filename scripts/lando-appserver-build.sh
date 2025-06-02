@@ -15,5 +15,4 @@ if [ ! -f database/database.sqlite ]; then
   php artisan migrate:fresh
 fi
 
-
-echo "✅ Laravel setup е завършен успешно."
+echo "✅ Laravel setup finished ."
