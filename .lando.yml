@@ -21,6 +21,10 @@ tooling:
     service: node
     cmd: npx
 events:
-  post-rebuild:
+  post-build:
     - appserver: composer install
+    - appserver: cp .env.example .env
+    - appserver: php artisan key:generate
     - node: npm run build
+  post-start:
+    - node: npm run dev
