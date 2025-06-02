@@ -1,8 +1,13 @@
--# chat
--Example with openAI implementation
+# OpenAI Chat
+## Example with OpenAI implementation
 
--[Lando install](https://docs.lando.dev/install/linux.html)
+### Initial Setup
 
--lando start
--lando npm run build
--lando npm run dev
+#### Create .env and coppy .env.example into .env
+#### Add OpenAi api keys into .env
+- OPENAI_API_KEY=
+- OPENAI_ORGANIZATION=
+
+#### Install Lando
+- [Lando install](https://docs.lando.dev/install/linux.html)
+- lando start
