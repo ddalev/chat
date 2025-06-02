@@ -9,5 +9,6 @@
 - OPENAI_ORGANIZATION=
 
 #### Install Lando
-- [Lando install](https://docs.lando.dev/install/linux.html)
+- [Get Lando for Linux](https://docs.lando.dev/install/linux.html)
+- [Get Lando for MacOs](https://docs.lando.dev/install/macos.html)
 - lando start
