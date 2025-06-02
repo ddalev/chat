@@ -10,6 +10,10 @@ services:
       - 3009:3009
     build:
       - npm install
+      - npm run build
+  appserver:
+    build:
+      - scripts/lando-appserver-build.sh
 tooling:
   node:
     service: node
@@ -21,10 +25,5 @@ tooling:
     service: node
     cmd: npx
 events:
-  post-build:
-    - appserver: composer install
-    - appserver: cp .env.example .env
-    - appserver: php artisan key:generate
-    - node: npm run build
   post-start:
-    - node: npm run dev
+    - node: nohup npm run dev > dev.log 2>&1 &
