@@ -16,7 +16,6 @@ class ExternalDataService implements ExternalDataInterface
      * Get Wikipedia page content and cache it for 24 hours.
      *
      * @param  string  $pageTitle  The title of the Wikipedia page to retrieve.
-     *
      * @return string|null The content of the page, or null if not found or an error occurs.
      */
     public function getWikipediaPage(string $pageTitle): ?string

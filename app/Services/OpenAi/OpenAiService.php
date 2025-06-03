@@ -13,7 +13,6 @@ class OpenAiService implements OpenAiServiceInterface
      *
      * @param  array  $messages
      * @param  float|null  $temperature
-     *
      * @return array|null
      */
     public function chat(array $userMessages, array $systemMessage = [], string $model = 'gpt-3.5-turbo', float $temperature = 0.7): ?CreateResponse

@@ -24,12 +24,13 @@ class ChatService implements ChatServiceInterface
 
     /**
      * ChatService constructor.
-     * 
+     *
      * Initializes the ChatService with the OpenAI service and external data service.
-     * @param OpenAiServiceInterface $openAiService The OpenAI service instance.
-     * @param ExternalDataInterface $externalDataService The external data service instance.
-     * @param array $config Configuration array containing 'instructions' and 'wiki_page'.
-     * 
+     *
+     * @param  OpenAiServiceInterface  $openAiService  The OpenAI service instance.
+     * @param  ExternalDataInterface  $externalDataService  The external data service instance.
+     * @param  array  $config  Configuration array containing 'instructions' and 'wiki_page'.
+     *
      * @throws \InvalidArgumentException If 'instructions' or 'wiki_page' is not provided in the config.
      */
     public function __construct(
@@ -51,8 +52,7 @@ class ChatService implements ChatServiceInterface
      * Handle the user's question by fetching the relevant Wikipedia page content
      * and generating a response using OpenAI's chat API.
      *
-     * @param string $question The user's question.
-     *
+     * @param  string  $question  The user's question.
      * @return array An array containing the user's message and the AI's reply.
      */
     public function handleUserQuestion(string $question): array
