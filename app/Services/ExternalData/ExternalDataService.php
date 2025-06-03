@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Http;
 class ExternalDataService implements ExternalDataInterface
 {
     /**
-     * Base URL for the Wikipedia API.
+     * Endpoint URL for the Wikipedia API.
      */
-    protected string $baseUrl = 'https://en.wikipedia.org/w/api.php';
+    protected string $endpointUrl = 'https://en.wikipedia.org/w/api.php';
 
     /**
      * Get Wikipedia page content and cache it for 24 hours.
@@ -29,7 +29,7 @@ class ExternalDataService implements ExternalDataInterface
         }
 
         try {
-            $response = Http::get($this->baseUrl, [
+            $response = Http::get($this->endpointUrl, [
                 'action' => 'query',
                 'prop' => 'extracts',
                 'explaintext' => true,
