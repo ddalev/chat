@@ -13,3 +13,6 @@
 - OPENAI_ORGANIZATION=
 
 - lando restart
+
+#### Access the functionality form
+- https://chat.lndo.site/chat
