@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import './ChatApp.css';
+import '@/components/ChatApp.css';
 
 export default {
   props: ['csrf'],
