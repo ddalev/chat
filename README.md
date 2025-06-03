@@ -16,3 +16,8 @@
 
 #### Access the functionality form
 - https://chat.lndo.site/chat
+
+#### Chat and source properties
+- config/chat.php
+- - system instructions
+- - Wikipedia source page title
