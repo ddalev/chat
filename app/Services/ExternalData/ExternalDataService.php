@@ -8,14 +8,28 @@ use Illuminate\Support\Facades\Http;
 class ExternalDataService implements ExternalDataInterface
 {
     /**
+     * Base URL for the Wikipedia API.
+     */
+    protected string $baseUrl = 'https://en.wikipedia.org/w/api.php';
+
+    /**
      * Get Wikipedia page content and cache it for 24 hours.
+     *
+     * @param  string  $pageTitle  The title of the Wikipedia page to retrieve.
+     * @return string|null The content of the page, or null if not found or an error occurs.
      */
     public function getWikipediaPage(string $pageTitle): ?string
     {
         $cacheKey = 'wikipedia_page_'.md5($pageTitle);
 
-        return Cache::remember($cacheKey, now()->addDay(), function () use ($pageTitle) {
-            $response = Http::get('https://en.wikipedia.org/w/api.php', [
+        $cachedValue = Cache::get($cacheKey);
+
+        if ($cachedValue !== null) {
+            return $cachedValue;
+        }
+
+        try {
+            $response = Http::get($this->baseUrl, [
                 'action' => 'query',
                 'prop' => 'extracts',
                 'explaintext' => true,
@@ -27,11 +41,21 @@ class ExternalDataService implements ExternalDataInterface
                 $data = $response->json();
                 $pages = $data['query']['pages'] ?? [];
                 $page = reset($pages);
+                $extract = $page['extract'] ?? null;
 
-                return $page['extract'] ?? null;
+                if ($extract !== null) {
+                    Cache::put($cacheKey, $extract, now()->addDay());
+                }
+
+                return $extract;
             }
+        } catch (\Exception $e) {
+            Log::error($e->getMessage(), ['page_title' => $pageTitle]);
 
+            // Handle URL encoding error
             return null;
-        });
+        }
+
+        return null;
     }
 }

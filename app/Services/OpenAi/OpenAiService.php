@@ -2,6 +2,7 @@
 
 namespace App\Services\OpenAi;
 
+use Illuminate\Support\Facades\Log;
 use OpenAI\Laravel\Facades\OpenAI;
 use OpenAI\Responses\Chat\CreateResponse;
 
@@ -16,7 +17,6 @@ class OpenAiService implements OpenAiServiceInterface
      */
     public function chat(array $userMessages, array $systemMessage = [], string $model = 'gpt-3.5-turbo', float $temperature = 0.7): ?CreateResponse
     {
-
         try {
             $response = OpenAI::chat()->create([
                 'model' => $model,
@@ -28,7 +28,7 @@ class OpenAiService implements OpenAiServiceInterface
 
             return $response;
         } catch (GuzzleException $e) {
-            var_dump($e->getMessage());
+            Log::error($e->getMessage(), ['user_message' => $userMessages]);
 
             // Log error or handle as needed
             return null;
