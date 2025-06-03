@@ -5,7 +5,7 @@ namespace App\Services\ChatService;
 use App\Services\ExternalData\ExternalDataInterface;
 use App\Services\OpenAi\OpenAiServiceInterface;
 
-class ChatService
+class ChatService implements ChatServiceInterface
 {
     /**
      * @var App\Services\OpenAi\OpenAiServiceInterface
@@ -24,6 +24,13 @@ class ChatService
 
     /**
      * ChatService constructor.
+     * 
+     * Initializes the ChatService with the OpenAI service and external data service.
+     * @param OpenAiServiceInterface $openAiService The OpenAI service instance.
+     * @param ExternalDataInterface $externalDataService The external data service instance.
+     * @param array $config Configuration array containing 'instructions' and 'wiki_page'.
+     * 
+     * @throws \InvalidArgumentException If 'instructions' or 'wiki_page' is not provided in the config.
      */
     public function __construct(
         OpenAiServiceInterface $openAiService,
@@ -41,7 +48,12 @@ class ChatService
     }
 
     /**
-     * Handle the user's question and return a response.
+     * Handle the user's question by fetching the relevant Wikipedia page content
+     * and generating a response using OpenAI's chat API.
+     *
+     * @param string $question The user's question.
+     *
+     * @return array An array containing the user's message and the AI's reply.
      */
     public function handleUserQuestion(string $question): array
     {

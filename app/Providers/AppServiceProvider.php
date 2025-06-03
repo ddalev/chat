@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Services\ChatService\ChatService;
+use App\Services\ChatService\ChatServiceInterface;
 use App\Services\ExternalData\ExternalDataInterface;
 use App\Services\ExternalData\ExternalDataService;
 use App\Services\OpenAi\OpenAiService;
@@ -25,6 +26,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             OpenAiServiceInterface::class,
             OpenAiService::class
+        );
+
+        $this->app->bind(
+            ChatServiceInterface::class,
+            ChatService::class
         );
 
         $this->app->singleton(OpenAiService::class, function ($app) {

@@ -16,6 +16,7 @@ class ExternalDataService implements ExternalDataInterface
      * Get Wikipedia page content and cache it for 24 hours.
      *
      * @param  string  $pageTitle  The title of the Wikipedia page to retrieve.
+     *
      * @return string|null The content of the page, or null if not found or an error occurs.
      */
     public function getWikipediaPage(string $pageTitle): ?string
@@ -52,7 +53,7 @@ class ExternalDataService implements ExternalDataInterface
         } catch (\Exception $e) {
             Log::error($e->getMessage(), ['page_title' => $pageTitle]);
 
-            // Handle URL encoding error
+            // Quietly handle the error and return null.
             return null;
         }
 

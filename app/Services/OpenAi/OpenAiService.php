@@ -13,6 +13,7 @@ class OpenAiService implements OpenAiServiceInterface
      *
      * @param  array  $messages
      * @param  float|null  $temperature
+     *
      * @return array|null
      */
     public function chat(array $userMessages, array $systemMessage = [], string $model = 'gpt-3.5-turbo', float $temperature = 0.7): ?CreateResponse
@@ -30,7 +31,7 @@ class OpenAiService implements OpenAiServiceInterface
         } catch (GuzzleException $e) {
             Log::error($e->getMessage(), ['user_message' => $userMessages]);
 
-            // Log error or handle as needed
+            // Quietly handle the error and return null.
             return null;
         }
     }

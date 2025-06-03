@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\ChatService\ChatService;
+use App\Services\ChatService\ChatServiceInterface;
 use Illuminate\Http\Request;
 
 class ChatController extends Controller
@@ -12,7 +12,7 @@ class ChatController extends Controller
         return view('chat');
     }
 
-    public function send(Request $request, ChatService $chatService)
+    public function send(Request $request, ChatServiceInterface $chatService)
     {
         $request->validate([
             'message' => 'required|string',
