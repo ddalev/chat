@@ -18,14 +18,26 @@ class ChatService
     private ExternalDataInterface $externalDataService;
 
     /**
+     * @var array{instructions: string, wiki_page: string}
+     */
+    private array $config;
+
+    /**
      * ChatService constructor.
      */
     public function __construct(
         OpenAiServiceInterface $openAiService,
-        ExternalDataInterface $externalDataService
+        ExternalDataInterface $externalDataService,
+        array $config
     ) {
         $this->openAiService = $openAiService;
         $this->externalDataService = $externalDataService;
+
+        if (! isset($config['instructions'], $config['wiki_page'])) {
+            throw new \InvalidArgumentException("Missing required config keys: 'instructions' and/or 'wiki_page' in config/chat.php");
+        }
+
+        $this->config = $config;
     }
 
     /**
@@ -33,12 +45,11 @@ class ChatService
      */
     public function handleUserQuestion(string $question): array
     {
-        $wikiPageContent = $this->externalDataService->getWikipediaPage('Hantec_Markets');
+        $wikiPageContent = $this->externalDataService->getWikipediaPage($this->config['wiki_page']);
 
         $systemMessage = [
             'role' => 'system',
-            'content' => "You are an assistant that answers ONLY based on the provided content below. If the user's question is not related to this content, reply with:\n".
-                "\"Sorry, I can't answer that question.\"\n\n".
+            'content' => $this->config['instructions'].
                 "=== CONTENT ===\n".
                 mb_substr($wikiPageContent, 0, 3900, 'UTF-8').
                 '================',

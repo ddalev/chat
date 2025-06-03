@@ -36,9 +36,12 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton(ChatService::class, function ($app) {
+            $config = config('chat');
+
             return new ChatService(
                 $app->make(OpenAiService::class),
                 $app->make(ExternalDataService::class),
+                $config
             );
         });
     }
